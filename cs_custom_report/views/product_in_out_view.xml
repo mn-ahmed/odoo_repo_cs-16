@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_view_move_tree" model="ir.ui.view">
+        <field name="name">stock.move.tree</field>
+        <field name="model">stock.move</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Moves" create="0" default_order="date desc">
+                <field name="date" groups="stock.group_stock_user"
+                       decoration-danger="(state not in ('cancel','done')) and date > current_date"/>
+                <field name="reference"/>
+                <field name="picking_type_id" invisible="1"/>
+                <field name="location_usage" invisible="1"/>
+                <field name="location_dest_usage" invisible="1"/>
+                <field name="product_id"/>
+                <field name="location_id" options="{'no_create': True}" string="From"
+                       decoration-muted="location_usage not in ('internal','transit')"/>
+                <field name="location_dest_id" options="{'no_create': True}" string="To"
+                       decoration-muted="location_dest_usage not in ('internal','transit')"/>
+                <field name="product_packaging_id" optional="hide" groups="stock.group_stock_user"/>
+                <!--                    <field name="product_uom_qty" string="Quantity"-->
+                <!--                        decoration-danger="(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))"-->
+                <!--                        decoration-success="(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))"/>-->
+                <field name="stock_in_out_difference_quantity" string="Quantity" sum="Total Difference"
+                       decoration-danger="(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))"
+                       decoration-success="(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))"/>
+                <field name="product_uom" options="{'no_open': True, 'no_create': True}" string="Unit"
+                       groups="uom.group_uom"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="state" widget='badge' optional="show"
+                       decoration-danger="state=='cancel'"
+                       decoration-info="state== 'assigned'"
+                       decoration-muted="state == 'draft'"
+                       decoration-success="state == 'done'"
+                       decoration-warning="state not in ('draft','cancel','done','assigned')"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_view_move_search" model="ir.ui.view">
+        <field name="name">stock.move.search</field>
+        <field name="model">stock.move</field>
+        <field eval="3" name="priority"/>
+        <field name="arch" type="xml">
+            <search string="Stock Moves">
+                <field name="name" string="Location"
+                       filter_domain="['|',('location_id', 'ilike', self),('location_dest_id', 'ilike', self)]"
+                       groups="stock.group_stock_multi_locations"/>
+                <field name="product_id"/>
+                <field name="origin"
+                       filter_domain="['|', '|', ('origin', 'ilike', self), ('name', 'ilike', self), ('picking_id', 'ilike', self)]"
+                       string="Reference"/>
+                <field name="location_id" string="Source Location" groups="stock.group_stock_multi_locations"/>
+                <field name="location_dest_id" string="Destination Location"
+                       groups="stock.group_stock_multi_locations"/>
+                <field name="partner_id" string="Partner"
+                       filter_domain="[('picking_id.partner_id', 'child_of', self)]"/>
+                <filter string="Ready" name="ready" domain="[('state','=','assigned')]"
+                        help="Stock moves that are Available (Ready to process)"/>
+                <filter string="To Do" name="future" domain="[('state','in',('assigned','confirmed','waiting'))]"
+                        help="Stock moves that are Confirmed, Available or Waiting"/>
+                <filter string="Done" name="done" domain="[('state','=','done')]"
+                        help="Stock moves that have been processed"/>
+                <separator/>
+                <filter string="Incoming" name="incoming"
+                        domain="[('location_id.usage', 'not in', ('internal', 'transit')), ('location_dest_id.usage', 'in', ('internal', 'transit'))]"/>
+                <filter string="Outgoing" name="outgoing"
+                        domain="[('location_id.usage', 'in', ('internal', 'transit')), ('location_dest_id.usage', 'not in', ('internal', 'transit'))]"/>
+                <filter string="Inventory" name="inventory" domain="[('is_inventory', '=', True)]"/>
+                <separator/>
+                <filter string="Date" name="today" date="date" help="Scheduled or processing date"/>
+                <group expand="0" string="Group By">
+                    <filter string="Product" name="by_product" domain="[]" context="{'group_by': 'product_id'}"/>
+                    <filter string="Picking" name="groupby_picking_id" domain="[]"
+                            context="{'group_by': 'picking_id'}"/>
+                    <filter string="Source Location" name="groupby_location_id" domain="[]"
+                            context="{'group_by': 'location_id'}" groups="stock.group_stock_multi_locations"/>
+                    <filter string="Destination Location" name="groupby_dest_location_id" domain="[]"
+                            context="{'group_by': 'location_dest_id'}" groups="stock.group_stock_multi_locations"/>
+                    <filter string="Status" name="status" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Creation Date" name="groupby_create_date" domain="[]"
+                            context="{'group_by': 'create_date'}" groups="stock.group_stock_user"/>
+                    <filter string="Scheduled Date" name="groupby_date" domain="[]" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="product_product_action_in_out" model="ir.actions.act_window">
+        <field name="name">Product In / Out</field>
+        <field name="res_model">stock.move</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="product_view_move_tree"/>
+        <field name="search_view_id" ref="product_view_move_search" />
+        <field name="context">{'search_default_by_product': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No stock move found
+            </p>
+            <p>
+                This menu gives you the full traceability of inventory
+                operations on a specific product. You can filter on the product
+                to see all the past or future movements for the product.
+            </p>
+        </field>
+    </record>
+
+</odoo>

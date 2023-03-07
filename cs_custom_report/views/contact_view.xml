@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="action_partner_form_contact_view_inherit">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath position="after" expr="//field[@name='company_type']">
+                <form>
+                    <group>
+                        <field name="secret_key" invisible="1"></field>
+                        <field name="vat" placeholder="e.g. BE0477472701"
+                               attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                        <value for="vat"/>
+                    </group>
+                </form>
+            </xpath>
+            <xpath position="after" expr="//field[@name='vat']">
+                <value for="vat"/>
+                <button name="get_detail_from_gst" type="object"
+                        style="text-decoration:underline;" class="btn-link oe_edit_only" string="Validate GST" attrs="{'invisible': [('secret_key', '=', False)]}"/>
+            </xpath>
+            <xpath position="replace" expr="//sheet/group/group/field[@name='vat']"/>
+        </field>
+    </record>
+
+     <record id="view_gst_key_company" model="ir.ui.view">
+        <field name="name">view_company_form_gst_key</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='general_info']" position="after">
+                <page name="get_secret_key_config" string="GST Configuration">
+                    <group>
+                        <field name="get_secret_key"/>
+                        <field name="pend_cnt"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
