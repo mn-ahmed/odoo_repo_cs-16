@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner,res.partner,model_res_partner,base.group_user,1,1,1,1
+access_aipl_gstin_master,aipl.gstin_master,model_aipl_gstin_master,,1,1,1,1
+access_aipl_ifsc,aipl.ifsc,model_aipl_ifsc,,1,1,1,1
+access_aipl_res_partner_bank,res.partner.bank,model_res_partner,,1,1,1,1

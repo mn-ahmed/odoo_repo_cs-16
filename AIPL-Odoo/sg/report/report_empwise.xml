@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_attendance_details_empwise_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="container-fluid">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                Organization Name:
+                            </td>
+                            <td t-esc="organisation_name">
+                            </td>
+                            <td>
+                                Department Name:
+                            </td>
+                            <td  t-esc="department_name">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Name :
+                            </td>
+                            <td t-esc="name">
+                            </td>
+                            <td>
+                                Designation :
+                            </td>
+                            <td t-esc="designation">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="container-fluid">
+                     <table class="table">
+                        <thead>
+                            
+                            <tr>
+                                <th scope="col">Method</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Duty On</th>
+                                <th scope="col">Duty Off</th>
+                                <th scope="col">Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="data['data']" t-as="items">
+                                <!-- t-attf-class="{{ 'table-warning' if x['TimeDiff'][0][0]&lt;'7' else '' }}" -->
+                                <tr >
+                                    <td t-esc="items['Method']"></td>
+                                    <td t-esc="datetime.datetime.strptime(items['DutyOn'], '%Y-%m-%d %H:%M:%S').strftime('%d-%m-%Y')"></td>
+                                    <td t-esc="datetime.datetime.strptime(items['DutyOn'], '%Y-%m-%d %H:%M:%S').strftime('%H:%M:%S')"></td>
+                                    <td t-esc="datetime.datetime.strptime(items['DutyOff'], '%Y-%m-%d %H:%M:%S').strftime('%H:%M:%S')"></td>
+                                    <td t-esc="items['TimeDiff']"></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

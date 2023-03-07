@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="cs_split_accounting.list">
+      <field name="name">cs_split_accounting list</field>
+      <field name="model">cs_split_accounting.cs_split_accounting</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="cs_split_accounting.action_window">
+      <field name="name">cs_split_accounting window</field>
+      <field name="res_model">cs_split_accounting.cs_split_accounting</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="cs_split_accounting.action_server">
+      <field name="name">cs_split_accounting server</field>
+      <field name="model_id" ref="model_cs_split_accounting_cs_split_accounting"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="cs_split_accounting" id="cs_split_accounting.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="cs_split_accounting.menu_1" parent="cs_split_accounting.menu_root"/>
+    <menuitem name="Menu 2" id="cs_split_accounting.menu_2" parent="cs_split_accounting.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="cs_split_accounting.menu_1_list" parent="cs_split_accounting.menu_1"
+              action="cs_split_accounting.action_window"/>
+    <menuitem name="Server to list" id="cs_split_accounting" parent="cs_split_accounting.menu_2"
+              action="cs_split_accounting.action_server"/>
+-->
+  </data>
+</odoo>

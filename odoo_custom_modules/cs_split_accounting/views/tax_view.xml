@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="action_split_account_form_view_tax_tree_inherit">
+        <field name="name">account.tax.form.split.inherited</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form"/>
+        <field name="arch" type="xml">
+            <xpath position="after"
+                   expr="//field[@name='cash_basis_transition_account_id']">
+                <field name="is_split_account" string="Split Account" attrs="{'invisible':[('type_tax_use','!=', 'purchase')]}"/>
+                <value for="cash_basis_transition_account_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

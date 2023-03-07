@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="lalshah_items_tree" model="ir.ui.view">
+    <field name="name">Lalshah Items</field>
+    <field name="model">lalshah_items.lalshah_items</field>
+    <field name="arch" type="xml">
+      <tree create="1">
+        <field name="item_name" />
+        <field name="item_description" />
+        <field name="item_unit" />
+        <field name="item_hsn" options="{'format': 'none'}" />
+        <field name="item_porate" string="PO Rate" />
+        <field name="item_gstrate" />
+        <field name="item_porate_inc_gstrate" />
+        <field name="margin" />
+        <field name="ns_rate" />
+        <field name="cs_rate" />
+        <field name="status" />
+        <field name="updated_timestamp" />
+      </tree>
+    </field>
+  </record>
+
+  <record id="lalshah_items_search" model="ir.ui.view">
+    <field name="name">Lalshah Items Search</field>
+    <field name="model">lalshah_items.lalshah_items</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="item_name" />
+        <field name="item_description" />
+        <field name="item_unit" />
+      </search>
+    </field>
+  </record>
+
+  <record id="lalshah_items_form" model="ir.ui.view">
+    <field name="name">Lashah Items Form</field>
+    <field name="model">lalshah_items.lalshah_items</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button name="action_activate" class="btn btn-success" type="object" string="Activate" attrs="{'invisible' : [('status','=',True)] }" />
+          <button name="action_deactivate" class="btn btn-danger" type="object" string="Deactivate" attrs="{'invisible' : [('status','=',False)] }" />
+        </header>
+        <sheet>
+          <div class="oe-title">
+            <h3>
+              <field name="item_description" readonly="1" />
+            </h3>
+          </div>   
+            <group>
+              <group>
+                <field name="item_name" />
+              </group>
+              <group>
+                <field name="item_unit" />
+              </group>
+              <group>
+                <field name="item_description" />
+              </group>
+              <group>
+                <field name="item_hsn" options="{'format': 0}" />
+              </group>
+              <group>
+                <field name="item_porate" />
+              </group>
+              <group>
+                <field name="item_gstrate" />
+              </group>
+              <group>
+                <field name="item_porate_inc_gstrate" />
+              </group>
+              <group>
+                <field name="margin" />
+              </group>
+              <group>
+                <field name="ns_rate" readonly="1" force_save="1"/>
+              </group>
+              <group>
+                <field name="cs_rate" />
+              </group>
+              <group>
+                <field name="status" readonly="1" />
+              </group>
+              <group>
+                <field name="updated_timestamp" force_save="1" />
+              </group>
+            </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

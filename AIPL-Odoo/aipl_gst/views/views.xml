@@ -1,0 +1,114 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="aipl_gst.list">
+      <field name="name">AIPL GST list</field>
+      <field name="model">aipl.gst.b2b</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="trdnm" />
+          <field name="ctin" />
+          <field name="inum" />
+          <field name="txval" />
+          <field name="igst" />
+          <field name="cgst" />
+          <field name="sgst" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="aipl_gst_b2b_search">
+      <field name="name">AIPL GST search</field>
+      <field name="model">aipl.gst.b2b</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="trdnm" />
+          <field name="ctin" />
+          <field name="inum" />
+          <field name="txval" />
+          <field name="igst" />
+          <field name="cgst" />
+          <field name="sgst" />
+        </search>
+      </field>
+    </record>
+
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="aipl_gst.action_window">
+      <field name="name">B2B</field>
+      <field name="res_model">aipl.gst.b2b</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="aipl_gst_cdnr_action_window">
+      <field name="name">B2B CDNR</field>
+      <field name="res_model">aipl.gst.cdnr</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="aipl_purchase_registry_action_window">
+      <field name="name">Purchase Registry</field>
+      <field name="res_model">aipl.purchase.register</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="aipl_gst_cdnr_tree">
+      <field name="name">AIPL GST CDNR</field>
+      <field name="model">aipl.gst.cdnr</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="trdnm" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="aipl_gst_purchase_registry_tree">
+      <field name="name">AIPL Purchase Registry</field>
+      <field name="model">aipl.purchase.register</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="org_name" />
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+    <!-- <record model="ir.actions.server" id="category_python_action">
+      <field name="name">aipl_gst server</field>
+      <field name="model_id" ref="model_aipl_gst_b2b" />
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": aipl.gst.b2b,
+        }
+      </field>
+    </record> -->
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="AIPL GST" id="aipl_gst.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="GST" id="aipl_gst.menu_1" parent="aipl_gst.menu_root"/>
+    <menuitem name="Purchase Registry" id="aipl_gst.menu_2" parent="aipl_gst.menu_root" action="aipl_purchase_registry_action_window" />
+
+    <!-- actions -->
+
+    <menuitem name="B2B" id="aipl_gst.menu_1_list" parent="aipl_gst.menu_1"
+              action="aipl_gst.action_window"/>
+    <menuitem name="B2B CDNR" id="aipl_gst_menu_2" parent="aipl_gst.menu_1" action="aipl_gst_cdnr_action_window" />
+
+    <menuitem id="aipl_gst_wizard_run_tool" parent="aipl_gst.menu_root" name="Accessories" action="action_run_tool" />
+
+</data>
+</odoo>

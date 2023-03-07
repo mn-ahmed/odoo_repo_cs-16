@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="form_vibhag_views">
+        <field name="name">Vibhag list</field>
+        <field name="model">vidhansabha.vibhag</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name="scode" />
+                <field name="district" />
+                <field name="ac_no" />
+                <field name="booth" />
+                <field name="booth_name" string="Booth Name" />
+                <field name="mathak_no" />
+                <field name="vibhag_no" />
+                <field name="society" />
+                <field name="society_e" />
+                <field name="area1" />
+                <field name="area_e" />
+                <field name="pincode" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_vidhaansabha_vibhag">
+      <field name="name">Vibhag</field>
+      <field name="res_model">vidhansabha.vibhag</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

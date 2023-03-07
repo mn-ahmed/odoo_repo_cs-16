@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lms_books_user,lms.books,model_lms_books,LMS.lms_group,1,1,1,0
+access_lms_books_manager,lms.books,model_lms_books,LMS.lms_group_user,1,1,0,0
+access_lms_authors,lms.authors,model_lms_authors,,1,1,1,0
+access_lms_genres,lms.genres,model_lms_genres,,1,1,1,0
+access_lms_users,lms.users,model_lms_users,,1,1,1,0
+access_lms_employees,lms.library_employees,model_lms_library_employees,,1,1,1,0
+access_inherit_lms_employees,hr.employee,model_hr_employee,,1,1,1,0

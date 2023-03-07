@@ -1,0 +1,112 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="sg.list">
+      <field name="name">SG Organisation</field>
+      <field name="model">sg.organisation</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="b_no"/>
+          <field name="name"/>
+          <field name="department_name"/> 
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="sg_form">
+      <field name="name">SG Organisation</field>
+      <field name="model">sg.organisation</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button name="print_report" type="object" string="print" class="oe_highlight" />
+          </header>
+          <sheet>
+            <group>
+              <field name="b_no" />
+              <field name="name" />
+              <field name="department_name" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="sg_search">
+      <field name="name">SG Organisation</field>
+      <field name="model">sg.organisation</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="b_no" />
+          <field name="name"/>
+        </search>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="sg_attendance">
+      <field name="name">SG Attendance</field>
+      <field name="model">sg.attendance</field>
+      <field name="arch" type="xml">
+        <tree default_order="timestamp desc">
+          <field name="b_no" />
+          <field name="employee_name" />
+          <field name="duty" />
+          <field name="timestamp" />
+        </tree>
+      </field>
+    </record>
+
+    <!--  -->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="sg.action_window">
+      <field name="name">SG window</field>
+      <field name="res_model">sg.organisation</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sg_attendance_action">
+      <field name="name">SG Attendance</field>
+      <field name="res_model">sg.attendance</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+    <!-- <record model="ir.actions.server" id="sg.action_server">
+      <field name="name">SG server</field>
+      <field name="model_id" ref="model_sg_sg"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record> -->
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="SG" id="sg.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Details" id="sg.menu_1" parent="sg.menu_root"/>
+    <menuitem name="Reporting" id="sg_reporting" parent="sg.menu_root" />
+    <!-- <menuitem name="Menu 2" id="sg.menu_2" parent="sg.menu_root"/> -->
+
+    <!-- actions -->
+
+    <menuitem name="Organisation" id="sg.menu_1_list" parent="sg.menu_1"
+              action="sg.action_window"/>
+    <menuitem name="Attendance" id="sg_atendance" parent="sg.menu_1" action="sg_attendance_action" />
+    <menuitem id="day_wise_menu" parent="sg_reporting" name="Day Wise" action="daily_wise_report_action" />
+
+  </data>
+</odoo>

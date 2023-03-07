@@ -1,0 +1,246 @@
+<odoo>
+  <data>
+	<!-- explicit list view definition -->
+	<record model="ir.ui.view" id="tree_bank_book">
+	  <field name="name">Reconciliation List</field>
+	  <field name="model">bank.book</field>
+	  <field name="arch" type="xml">
+		<tree  default_order='date desc'>
+		  <field name="date" />
+		  <field name="particulars" />
+		  <field name="received_from" />
+		  <field name="vch_type" />
+		  <field name="transaction_type" />
+		  <field name="instrument_no" />
+		  <field name="instrument_date" />
+		  <field name="bank_date" />
+		  <field name="debit" />
+		  <field name="credit" />
+		  <field name="is_reconciled" />
+		</tree>
+	  </field>
+	</record>
+
+	<!-- actions opening views on models -->
+	<record model="ir.actions.act_window" id="bank_book_action_window">
+	  <field name="name">Bank Book</field>
+	  <field name="res_model">bank.book</field>
+	  <field name="view_mode">tree,form</field>
+	</record>
+
+	<record model="ir.ui.view" id="reconciliation_list">
+	  <field name="name">Bank Statement</field>
+	  <field name="model">account.statement</field>
+	  <field name="arch" type="xml">
+		<tree  default_order='date desc'>
+		  <field name="date" />
+		  <field name="tran_id" />
+		  <field name="remarks" />
+		  <field name="utr_number" />
+		  <field name="instr_id" />
+		  <field name="withdrawals" />
+		  <field name="deposit" />
+		  <field name="balance" />
+		  <field name="is_reconciled" />
+		</tree>
+	  </field>
+	</record>
+
+	<record model="ir.actions.act_window" id="account_statement_action_window">
+	  <field name="name">Bank Statement</field>
+	  <field name="res_model">account.statement</field>
+	  <field name="view_mode">tree,form</field>
+	</record>
+
+	<record model="ir.ui.view" id="bank_book_form_view"> 
+		<field name="name">Bank Book</field>
+		<field name="model">bank.book</field>
+		<field name="arch" type="xml">
+		<form>
+			<sheet>
+			  <group>
+				<group>
+				  <field name="date" />  
+				</group>
+				<group>
+				  <field name="particulars" />  
+				</group>
+			  </group>
+			<group>
+				<group>
+					<field name="received_from" />  
+				</group>
+				<group>
+				  <field name="vch_type" />  
+				</group>
+			</group>
+			<group>
+				<group>
+					<field name="transaction_type" />  
+				</group>
+				<group>
+				  <field name="instrument_no" />  
+				</group>
+			</group>
+			<group>
+				<group>
+					<field name="instrument_date" />  
+				</group>
+				<group>
+				  <field name="is_reconciled" />  
+				</group>
+			</group>
+			<group>
+				<group>
+					<field name="debit" />  
+				</group>
+				<group>
+				  <field name="credit" />  
+				</group>
+			</group>
+			<group>
+				<group>
+					<field name="bank_date" />  
+				</group>
+			</group>
+			</sheet>
+		  </form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="account_statement_form_view"> 
+		<field name="name">Account Statement</field>
+		<field name="model">account.statement</field>
+		<field name="arch" type="xml">
+		<form>
+			<sheet>
+			  <group>
+				<group>
+				  <field name="date" />  
+				</group>
+				<group>
+				  <field name="tran_id" />  
+				</group>
+			  </group>
+			<group>
+				<group>
+					<field name="remarks" />  
+				</group>
+				<group>
+				  <field name="utr_number" />  
+				</group>
+			</group>
+			<group>
+				<group>
+					<field name="instr_id" />  
+				</group>
+				<group>
+				  <field name="withdrawals" />  
+				</group>
+			</group>
+			<group>
+				<group>
+					<field name="deposit" />  
+				</group>
+				<group>
+				  <field name="balance" />  
+				</group>
+			</group>
+			<group>
+				<group>
+					<field name="is_reconciled" />  
+				</group>
+			</group>
+			</sheet>
+		  </form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="bank_book_search_view"> 
+		<field name="name">Bank Book Search</field>
+		<field name="model">bank.book</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="date" />
+				<field name="particulars" />
+				<field name="received_from" />
+				<field name="vch_type" />
+				<field name="transaction_type" />
+				<field name="instrument_no" />
+				<field name="instrument_date" />
+				<field name="bank_date" />
+				<field name="debit" />
+				<field name="credit" />
+				<field name="is_reconciled" />
+				<filter string="Is Reconciled" name="is_reconciled" domain="[('is_reconciled', '=',True)]"/>
+				<filter string="Not Reconciled" name="is_reconciled" domain="[('is_reconciled', '=',False)]"/>
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="search_view"> 
+	  <field name="name">Account Statement Search</field>
+		<field name="model">account.statement</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="date" />
+				<field name="tran_id" />
+				<field name="remarks" />
+				<field name="utr_number" />
+				<field name="instr_id" />
+				<field name="withdrawals" />
+				<field name="deposit" />
+				<field name="balance" />
+				<field name="is_reconciled" />
+				<filter string="Is Reconciled" name="is_reconciled" domain="[('is_reconciled', '=',True)]"/>
+				<filter string="Not Reconciled" name="is_reconciled" domain="[('is_reconciled', '=',False)]"/>
+			</search>
+		</field>
+	</record>
+	
+	  <record model="ir.ui.view" id="reconciliation_entries_list">
+	  <field name="name">Reconciliation List</field>
+	  <field name="model">reconciled.entries</field>
+	  <field name="arch" type="xml">
+		<tree>
+		  <field name="statement_id" />
+		  <field name="statement_remarks" />
+		  <field name="statement_withdrawls" />
+		  <field name="bank_book_id" />
+		  <field name="bank_book_particulars" />
+		  <field name="bank_book_credit" />
+		  <field name="bank_book_debit" />
+		</tree>
+	  </field>
+	</record>
+
+	<record model="ir.actions.act_window" id="reconciled_entries_action_window">
+	  <field name="name">Reconciled Entries</field>
+	  <field name="res_model">reconciled.entries</field>
+	  <field name="view_mode">tree,form</field>
+	</record>
+
+	<record model="ir.actions.server" id="server_action_run_reconciliation">
+	  <field name="name">server_action_run_reconciliation</field>
+	  <field name="model_id" ref="model_reconciled_entries"/>
+	  <field name="type">ir.actions.server</field>
+	  <field name="state">code</field>
+	  <field name="code">model.run_reconciliation()</field>
+	</record>
+	<!-- Top menu item -->
+	<menuitem name="Reconciliation" id="reconciliation.menu_root"/>
+
+	<!-- menu categories -->
+	<menuitem name="Financial Data" id="reconciliation.fd" parent="reconciliation.menu_root"/>
+
+	<menuitem name="Run Reconciliation" id="reconciliation.rc" parent="reconciliation.menu_root" action="server_action_run_reconciliation" />
+
+   <!-- actions -->
+	<menuitem name="Bank Book" id="reconciliation.bb" parent="reconciliation.fd" action="bank_book_action_window"/>
+
+	<menuitem name="Bank Statement" id="reconciliation.as" parent="reconciliation.fd" action="account_statement_action_window"/>
+
+	<menuitem name="Reconciliation Entries" id="reconciliation.re" parent="reconciliation.fd" action="reconciled_entries_action_window"/>
+
+  </data>
+</odoo>

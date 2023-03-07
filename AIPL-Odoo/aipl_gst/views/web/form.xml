@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="form1" name="Partner Form">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container">
+                    <div class="col-md-12">
+                        <form method="post" action="/aipl/excel" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="name">Upload:</label>
+                                <input type="file" class="form-control" name="file_excel" id="name" required="true" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                Create
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,155 @@
+<?xml version="1.0" ?>
+
+<odoo>
+
+
+    <menuitem name="OpenAcademy" id="main_course_all"/>
+    <menuitem name="OpenAcademy" id="main_inside_openacademy" parent="main_course_all"/>
+    <!-- List view -->
+
+    <record id="view_openacade_course_tree"  model="ir.ui.view">
+        <field name="name">Course list view</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <tree string="Course">
+                <field name="name"/>
+                <field name="resonsible_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Course Action -->
+
+    <record id="action_openacade_course" model="ir.actions.act_window">
+        <field name="name">Course</field>
+        <field name="res_model">openacademy.course</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Course Menu-->
+
+    <!-- List view for session-->
+
+    <record id="view_openacade_session_tree"  model="ir.ui.view">
+        <field name="name">Session list view</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <tree string="Session">
+                <field name="name"/>
+                <field name="instructor_id"/>
+                <field name="seats"/>
+                <field name="start_date"/>
+                <field name="duration"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- form view for session-->
+    <record id="view_openacade_session_form"  model="ir.ui.view">
+        <field name="name">Session form view</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+        <form string="Session">
+            <header>
+                <field name="state" widget="statusbar"  statusbar_visible="draft,confirm,done"/>
+                <button name="action_confirm" type="object" string="Confirm" states="draft" context="{'test': 'ODOO'}"/>
+                <button name="action_delay" type="object" string="Delay" states="confirm"/>
+                <button name="action_done" type="object" string="Done" states="confirm"/>
+                <button name="action_confirm" type="object" string="Confirm" states="delay"/>
+                <button name="action_cancel" type="object" string="Cancel" states="delay"/> 
+                <button name="%(openacademy_wizard_Action)d" type="action" string="Register Attendee" states="confirm"/>
+            </header>
+            <sheet>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                </div> 
+                <group>
+                    <group>
+                       <field name="instructor_id"/>
+                       <field name="seats"/>
+                    </group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="duration"/>
+                        <field name="attendee_count"/>
+                        <field name="email"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Attendee">
+                        <field name="partner_ids"/>                    
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+        </field>
+    </record>
+
+    <record id="view_openacademy_session_calendar" model='ir.ui.view'>
+        <field name="name">session calendar view</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <calendar string="Session Calendar" date_start="start_date" color="instructor_id">
+                <field name="name"/>
+                <field name="instructor_id"/>
+                <field name="seats"/>
+            
+            </calendar>
+        
+        
+        </field> 
+    
+    </record>
+
+    <record id="view_openacademy_session_graph" model='ir.ui.view'>
+        <field name="name">session graph view</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <graph string="Session graph view">
+                <field name="name"/>
+                <field name="attendee_count"/>
+            </graph>
+        </field> 
+    </record>
+
+
+    <record id="view_openacademy_session_search" model='ir.ui.view'>
+        <field name="name">session search view</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <search string="Session search view">
+                <field name="name" filter_domain="['|', ('instructor_id', 'ilike', self), ('course_id', 'ilike', self)]"/>
+                <field name="instructor_id"/>
+                <filter name="confirm"  string="Confirm" domain="[('state', '=', 'confirm')]"/>
+                <filter name="done"  string="Done" domain="[('state', '=', 'done')]"/>
+                <filter name="instructor" string="Instructor" domain="[]" context="{'group_by': 'instructor_id'}"/>
+                <filter name="Course" string="Course" domain="[]" context="{'group_by': 'course_id'}"/>
+                <field name="attendee_count"/>
+            </search>
+        </field> 
+    </record>
+
+
+
+    <record id="action_openacade_session" model="ir.actions.act_window">
+        <field name="name">Session</field>
+        <field name="res_model">openacademy.session</field>
+        <field name="view_mode">tree,form,calendar,graph</field>
+        <field name="domain">[('state', '=', 'confirm')]</field>
+        <field name="context">{}</field>
+    </record>
+
+
+    <menuitem name="Session" id="session_menuitem" parent="main_inside_openacademy" action="action_openacade_session"/>
+
+
+
+    <menuitem name="Course" id="course_menuitem" parent="main_inside_openacademy" action="action_openacade_course"/>
+
+
+
+
+
+</odoo>

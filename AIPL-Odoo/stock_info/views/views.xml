@@ -1,0 +1,58 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="stock_info.list">
+      <field name="name">stock_info list</field>
+      <field name="model">stock_info.stock</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="product_id" />
+          <field name="mir_stock" />
+          <field name="sar_stock" />
+          <field name="create_date" widget="date" />
+          <button name="confirm" type="object" class="oe_highlight oi oi-launch" />
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="stock_info.action_window">
+      <field name="name">stock_info window</field>
+      <field name="res_model">stock_info.stock</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="stock_info.action_server">
+      <field name="name">stock_info server</field>
+      <field name="model_id" ref="model_stock_info_stock_info"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="Stock Info" id="stock_info.menu_root"
+      web_icon="stock_info,static/description/odoo_icon.png" />
+
+    <!-- menu categories -->
+
+    <menuitem name="Stock" id="stock_info_stock" parent="stock_info.menu_root"
+      action="stock_info.action_window" />
+    <menuitem name="Upload Stock" id="stock_info_upload_stock" parent="stock_info.stock_info_stock"
+      action="action_upload_stock_wizard" />
+
+  </data>
+</odoo>

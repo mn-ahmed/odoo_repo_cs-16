@@ -1,0 +1,150 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="list_vidhansabha_voter">
+      <field name="name">Voter List</field>
+      <field name="model">vidhansabha.voter</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="company_id"  groups="base.group_multi_company"/>
+          <field name="eng_fullname" />
+          <field name="guj_fullname" />
+          <!-- <field name="name" /> -->
+          <!-- <field name="mname" />
+          <field name="surname" />
+          <field name="eng_fname" />
+          <field name="eng_mname" />
+          <field name="eng_surname" /> -->
+          <field name="birthdate" />
+          <field name="phone_no" />
+          <field name="booth" />
+          <field name="ward" />
+          <field name="ward_name" />
+          <field name="booth_name" />
+          <field name="address" />
+          <field name="soc_no" />
+          <field name="sex" />
+          <field name="age" />
+          <field name="icard" />
+          <field name="eng_address" />
+          <field name="scode" />
+          <field name="ac_no" />
+          <field name="mathak_no" />
+          <field name="district" />
+          <field name="vibhag_no" />
+          <field name="house_no" />
+          <field name="house_no_e" />
+          <!-- <field name="rln_fm_name" />
+          <field name="rln_m_name" />
+          <field name="rln_lastname" />
+          <field name="rln_fm_name_e" />
+          <field name="rln_eng_m_name" />
+          <field name="rln_lastname_e" /> -->
+          <field name="rln_type" />
+          <field name="statustype" />
+          <field name="rollno" />
+          <field name="mrollno" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="search_vidhansabha_voter">
+      <field name = "name">Search voter</field>
+      <field name="model">vidhansabha.voter</field>
+      <field name="arch" type="xml">
+        <search string="Data">
+          <!-- <field name="name" /> -->
+          <field name="eng_fullname" />
+          <field name="guj_fullname" />
+          <field name="mname" />
+          <field name="surname" />
+          <field name="eng_fname" />
+          <field name="eng_mname" />
+          <field name="eng_surname" />
+          <field name="birthdate" />
+          <field name="phone_no" />
+          <field name="booth" />
+          <field name="booth_name" />
+          <field name="eng_booth" />
+          <field name="booth_no" />
+          <field name="address" />
+          <field name="soc_no" />
+          <field name="sex" />
+          <field name="age" />
+          <field name="icard" />
+          <field name="eng_address" />
+          <field name="scode" />
+          <field name="ac_no" />
+          <field name="booth_no" />
+          <field name="mathak_no" />
+          <field name="district" />
+          <field name="vibhag_no" />
+          <field name="house_no" />
+          <field name="house_no_e" />
+          <field name="rln_fm_name" />
+          <field name="rln_m_name" />
+          <field name="rln_lastname" />
+          <field name="rln_fm_name_e" />
+          <field name="rln_eng_m_name" />
+          <field name="rln_lastname_e" />
+          <field name="rln_type" />
+          <field name="statustype" />
+          <field name="rollno" />
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="form_vidhansabha_voter">
+      <field name="name">Voter List</field>
+      <field name="model">vidhansabha.voter</field>
+      <field name="mode">primary</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="eng_fullname" />
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/div[not(@name)][1]/h1[1]/field[@name='name'][2]" position="replace"/>
+        <xpath expr="//field[@name='company_type']" position="replace" />
+        <xpath expr="//field[@name='parent_id']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//field[@name='vat']" position="after">
+          <field name="company_id"/>
+          <field name="icard" />
+          <field name="birthdate" />
+          <field name="booth" /> 
+          <field name="eng_booth" /> 
+          <field name="booth_no" />
+          <field name="booth_name" string="Booth Name" />
+          <field name="fname" />
+          <field name="mname" />
+          <field name="surname" />
+          <field name="eng_fname" />
+          <field name="eng_mname" />
+          <field name="eng_surname" />
+          <field name="eng_fullname" />
+          <field name="guj_fullname" />
+        </xpath>
+        </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="action_vidhaansabha_voter">
+      <field name="name">Nikol Voter (2014)</field>
+      <field name="res_model">vidhansabha.voter</field>
+      <!-- <field name="groups_id" eval="[(4, ref('vidhansabha.res_group_nikol_admin'))]"> </field> -->
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.server" id="server_action_generate_full_name">
+       <field name="name">Generate Full Name</field>
+       <field name="model_id" ref="vidhansabha.model_vidhansabha_voter"/>
+       <field name="binding_model_id" ref="vidhansabha.model_vidhansabha_voter"/>
+       <field name="state">code</field>
+       <field name="code">
+           action = records.action_update_full_name()
+       </field>
+   </record>
+
+  </data>
+</odoo>

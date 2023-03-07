@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="action_split_account_form_contact_view_inherit">
+        <field name="name">res.partner.split.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath position="after" expr="//sheet/notebook/page[@name='internal_notes']">
+                <page name="tax_split_detail" string="Advance Setting">
+                    <group name="container_row_2">
+                        <group string="Tax" name="sale">
+                            <field name="tax_ids" widget="many2many_tags" string="TDS Type" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

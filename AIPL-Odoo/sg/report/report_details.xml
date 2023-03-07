@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="sg_daily_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <!-- <div class="page">
+                    <h2>
+                        Daily
+                    </h2>
+                </div> -->
+                <div class="container-fluid mb-5">
+                    <div style="text-align: center;">
+                        <h3> 
+                            <t t-out="organisation_name" />
+                        </h3>
+                    </div>
+                    <div style="text-align: center;">
+                        Date: <t t-out="datetime.datetime.strptime(date, '%Y-%m-%d').strftime('%d-%m-%Y')" />
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <span style="text-align: center;">
+                        Date: <t t-esc="datetime.datetime.strptime(date, '%Y-%m-%d').strftime('%d-%m-%Y')" />
+                    </span>
+                </div>
+                <div class="container-fluid">
+                    <t t-if="data">
+                        <div class="container-fluid">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Employee Name</th>
+                                        <th scope="col">B No</th>
+                                        <th scope="col">Method</th>
+                                        <th scope="col">Designation</th>
+                                        <th scope="col">Duty On</th>
+                                        <th scope="col">Duty Off</th>
+                                        <th scope="col">Hours</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                        <t t-foreach="data" t-as="dt">
+                                            <tr>
+                                                <td style="text-align:center" colspan="7" t-esc="dt"></td>
+                                            </tr>
+                                            <t t-foreach="dt_value" t-as="y">
+                                                <tr>
+                                                    <td t-esc="y['name']"></td>
+                                                    <t t-if="y['Org-B_No']">
+                                                        <td t-esc="y['Org-B_No']"></td>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <td t-esc="y['B_No']"></td>
+                                                    </t>
+                                                    <td t-esc="y['Method']"></td>
+                                                    <td t-esc="y['designation']"></td>
+                                                    <!-- DUTY ON -->
+                                                    <t t-if="y['DutyOn'] and not 'AB' in y['DutyOn'] " >
+                                                        <td t-esc="datetime.datetime.strptime(y['DutyOn'], '%Y-%m-%d %H:%M:%S').strftime('%H:%M:%S')"></td>
+                                                    </t>
+                                                    <t t-else=""> <td> - </td></t>
+                                                    <!-- DUTY OFF -->
+                                                    <t t-if="y['DutyOn'] and not 'AB' in y['DutyOn'] " >
+                                                        <td t-esc="datetime.datetime.strptime(y['DutyOff'], '%Y-%m-%d %H:%M:%S').strftime('%H:%M:%S')"></td>
+                                                    </t>
+                                                    <t t-else=""> <td> - </td></t>
+                                                    <td t-esc="y['TimeDiff']"></td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.module.category" id="lms_access">
+        <field name="name">LMS</field>
+    </record>
+    <record id="lms_group" model="res.groups">
+        <field name="name">Manager Group</field>
+        <field name="category_id" ref="LMS.lms_access" />
+    </record>
+    <record id="lms_group_user" model="res.groups">
+        <field name="name">Create User Group</field>
+        <field name="category_id" ref="LMS.lms_access" />
+    </record>
+</odoo>

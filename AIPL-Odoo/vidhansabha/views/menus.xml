@@ -1,0 +1,39 @@
+<odoo>
+
+    <menuitem name="Vidhansabha" id="menu_root_vidhasabha" />
+    <!-- menu categories -->
+    <menuitem name="Member Data" id="menu_member_data" parent="menu_root_vidhasabha"/>
+    <menuitem name="Booth Team" id="menu_booth_team" parent="menu_root_vidhasabha"/>
+
+    <menuitem name="Ward" id="menu_ward" parent="menu_root_vidhasabha"/>
+
+    <!-- VIBHAG -->
+    <menuitem name="Vibhag" 
+    id="menu_vibhag" 
+    parent="menu_root_vidhasabha"
+    action = "action_vidhaansabha_vibhag" />
+
+    <!-- KARYAKARTA -->
+    <menuitem name="Karyakarta" 
+    id="menu_karyakarta" 
+    parent="menu_root_vidhasabha"
+    action = "action_vidhaansabha_karyakarta" />
+
+    <!-- actions -->
+    <menuitem name="Matdar Yaadi (2014)" id="menu_vidhansabha_voter" parent="menu_member_data" action="action_vidhaansabha_voter"/>
+    
+    <menuitem name="Booths" id="menu_vidhansabha_booths" parent="menu_booth_team" action="action_vidhaansabha_booths"/>
+    
+    <menuitem name="Booth Teams" id="menu_booth_data" parent="menu_booth_team" action="action_booth_team"/>
+    
+    <menuitem name="Booth personnel"
+    id="menu_booth_personnel"
+    parent="menu_booth_team"
+    action="action_booth_personnel"/>
+
+     <menuitem name="Ward Team" 
+     id="menu_ward_team"
+     parent="menu_ward"
+     action="action_ward_view" />
+
+</odoo>

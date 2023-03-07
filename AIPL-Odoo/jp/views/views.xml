@@ -1,0 +1,78 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="jp.list">
+      <field name="name">jp list</field>
+      <field name="model">jp.jp</field>
+      <field name="arch" type="xml">
+        <tree string="d">
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="jp.action_window">
+      <field name="name">jp window</field>
+      <field name="res_model">jp.jp</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="jp_name_insert">
+      <field name="name">Records</field>
+      <field name="res_model">jp.name_insert</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="tree_jp_name_insert">
+      <field name="name">Name Insert</field>
+      <field name="model">jp.name_insert</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+          <field name="mobile_no" />
+          <field name="org_name" />
+        </tree>
+      </field>
+    </record>
+
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="jp.action_server">
+      <field name="name">jp server</field>
+      <field name="model_id" ref="model_jp_jp"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="jp" id="jp.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Menu 1" id="jp.menu_1" parent="jp.menu_root"/>
+    <!-- <menuitem name="Menu 2" id="jp.menu_2" parent="jp.menu_root"/> -->
+
+    <!-- actions -->
+
+    <menuitem name="List" id="jp.menu_1_list" parent="jp.menu_1"
+              action="jp.action_window"/>
+    <menuitem name="Enter Data" id="jp" parent="jp.menu_1" action="jp_name_insert" />
+
+  </data>
+</odoo>

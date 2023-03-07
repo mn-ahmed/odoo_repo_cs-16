@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="aipl_purchase_list">
+      <field name="name">AIPL-Purchase list</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_tree" />
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+        </tree>
+      </field>
+    </record>
+ 
+    <record model="ir.ui.view" id="aipl_purchase_form">
+      <field name="name">AIPL-Purchase Form</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form" />
+      <field name="arch" type="xml">
+      <!-- <xpath expr="//*[@name='accounting']" position="after">
+          <field name="ifsc_id" />     
+      </xpath> -->
+      <xpath expr="//*[@name='internal_notes']" position="after">
+          <page string="TDS">
+            <sheet>
+              <group>
+                <group>
+                  <field name="pan" />
+                </group>
+                <group>
+                  <field name="pan_type" readonly="1" force_save="1" />
+                </group>
+              </group>
+              <group>
+                <group>
+                  <field name="gstin" />
+                </group>
+                <group>
+                  <field name="gstin_state" readonly="1" force_save="1" />
+                </group>
+                <group>
+                  <field name="ifsc_id" />
+                  <field name="bank_name" />
+                  <field name="bank_branch" />
+                </group>
+              </group>
+            </sheet>
+          </page>
+          <!-- <page string="Bank">
+            <group>
+              <field name="name" />
+            </group>
+          </page> -->
+        </xpath>
+      </field>
+    </record>
+    
+    <record id="partner_inherit_id" model="ir.ui.view">
+      <field name="name">res.partner.inherit</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="account.view_partner_property_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//*[@name='acc_number']" position="after">
+          <field name="ifsc_id"/>
+        </xpath>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="aipl_purchase_action_window">
+      <field name="name">AIPL-Purchase window</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">tree,form</field>
+      <!-- <field name="view_id" ref="aipl_purchase_list" /> -->
+    </record>
+
+    <record model="ir.ui.view" id="aipl_gstin_list">
+      <field name="name">AIPL-GSTIN list</field>
+      <field name="model">aipl.gstin_master</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+          <field name="code" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="aipl_ifsc_list">
+      <field name="name">AIPL-IFSC list</field>
+      <field name="model">aipl.ifsc</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+          <field name="bank" />
+          <field name="branch" />
+        </tree>
+      </field>
+    </record>
+
+  <record model="ir.actions.act_window" id="aipl_gstin_action_window">
+    <field name="name">AIPL-GSTIN</field>
+    <field name="res_model">aipl.gstin_master</field>
+    <field name="view_mode">tree,form</field>
+    <!-- <field name="view_id" ref="aipl_purchase_list" /> -->
+  </record>
+
+  <record model="ir.actions.act_window" id="aipl_ifsc_action_window">
+    <field name="name">AIPL-IFSC</field>
+    <field name="res_model">aipl.ifsc</field>
+    <field name="view_mode">tree,form</field>
+    <!-- <field name="view_id" ref="aipl_purchase_list" /> -->
+  </record>
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="AIPL-Purchase" id="aipl_purchase_menu_root"/>
+
+    <!-- menu categories -->
+
+  <menuitem name="Menu 1" id="aipl_purchase_menu_1" parent="aipl_purchase_menu_root" action="aipl_purchase_action_window" />
+
+  <menuitem name="GSTIN Master" id="aipl_purchase_menu_2" parent="aipl_purchase_menu_root" action="aipl_gstin_action_window" />
+
+  <menuitem name="IFSC" id="aipl_purchase_menu_3" parent="aipl_purchase_menu_root" action="aipl_ifsc_action_window" />
+
+</odoo>

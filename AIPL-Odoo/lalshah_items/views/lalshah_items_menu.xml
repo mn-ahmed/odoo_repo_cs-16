@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="menu_lalshah_items_actions" model="ir.actions.act_window">
+        <field name="name">Lalshah Items</field>
+        <field name="res_model">lalshah_items.lalshah_items</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_lalshah_items_root" name="Lalshah">
+        <menuitem id="menu_lalshah_items_menu" name="Lalshah Items">
+            <menuitem id="menu_lalshah_items_action_id" action="menu_lalshah_items_actions" />
+        </menuitem>
+    </menuitem>
+</odoo>

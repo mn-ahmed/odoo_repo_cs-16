@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="tree_vidhaansabha_karyakarta">
+      <field name="name">karyakarta</field>
+      <field name="model">vidhansabha.karyakarta</field>
+      <field name='arch' type='xml'>
+        <tree>
+          <field name="ward" />
+          <field name="name" />
+          <field name="responsibility_1" />
+          <field name="responsibility_2" />
+          <field name="responsibility_3" />
+          <field name="location" />
+          <field name="mobile" />
+          <field name="booth" />
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_vidhaansabha_karyakarta">
+      <field name="name">karyakarta</field>
+      <field name="res_model">vidhansabha.karyakarta</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+  </data>
+</odoo>

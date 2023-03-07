@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nikol,nikol.matdaar.yaadi,model_nikol_matdar_yaadi,base.group_user,1,1,1,1
+access_nikol_res_partner,nikol.res.partner,model_nikol_res_partner,base.group_user,1,1,1,1
+access_nikol_assign_user,nikol.assign.user,model_nikol_assign_user,base.group_user,1,1,1,1
+access_amraiwadi_page_samiti,nikol.amraiwadi.page.samiti,model_amraiwadi_page_samiti,base.group_user,1,1,1,1
+access_nikol_chairman_secretary,nikol.chairman.secretary,model_nikol_chairman_secretary,base.group_user,1,1,1,1

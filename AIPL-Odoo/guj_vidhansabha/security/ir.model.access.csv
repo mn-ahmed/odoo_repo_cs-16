@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_guj_vidhansabha_voter,guj_vidhansabha.voter,model_guj_vidhansabha_voter,base.group_user,1,1,1,1
+access_guj_vidhansabha_ward,guj_vidhansabha_ward,model_guj_vidhansabha_ward,base.group_user,1,1,1,1
+access_guj_vidhansabha_mathak,guj_vidhansabha_mathak,model_guj_vidhansabha_mathak,base.group_user,1,1,1,1
+access_guj_vidhansabha_booth,guj_vidhansabha_booth,model_guj_vidhansabha_booth,base.group_user,1,1,1,1

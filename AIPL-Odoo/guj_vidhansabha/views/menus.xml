@@ -1,0 +1,51 @@
+<odoo>
+
+    <menuitem name="Guj Vidhansabha" id="menu_root_vidhasabha" />
+    <!-- menu categories -->
+    <menuitem name="Voter" id="menu_member_data" parent="menu_root_vidhasabha" sequence="1" />
+    
+    <menuitem name="Ward" id="menu_ward" parent="menu_root_vidhasabha" sequence="2" />
+
+    <menuitem name="Booth" id="menu_booth_team" parent="menu_root_vidhasabha" 
+    action="action_booth"
+    sequence="3" />
+
+    <menuitem name="Vibhag" 
+    id="menu_vibhag"
+    parent="menu_root_vidhasabha" 
+    action="action_vibhag"
+    sequence="4" />
+
+    <!-- VIBHAG -->
+    <!-- <menuitem name="Vibhag" 
+    id="menu_vibhag" 
+    parent="menu_root_vidhasabha"
+    action = "action_vidhaansabha_vibhag" /> -->
+
+    <!-- KARYAKARTA -->
+    <!-- <menuitem name="Karyakarta" 
+    id="menu_karyakarta" 
+    parent="menu_root_vidhasabha"
+    action = "action_vidhaansabha_karyakarta" /> -->
+
+    <!-- actions -->
+    <menuitem name="Matdar Yaadi (Nikol)" 
+    id="menu_vidhansabha_voter"
+    parent="menu_member_data"
+    action="action_vidhaansabha_voter" />
+
+     <menuitem name="Ward" 
+     id="menu_ward_team"
+     parent="menu_ward"
+     action="action_ward_view" />
+    
+    <!-- <menuitem name="Booths" id="menu_vidhansabha_booths" parent="menu_booth_team" action="action_vidhaansabha_booths"/> -->
+    
+    <!-- <menuitem name="Booth Teams" id="menu_booth_data" parent="menu_booth_team" action="action_booth_team"/> -->
+    
+    <!-- <menuitem name="Booth personnel"
+    id="menu_booth_personnel"
+    parent="menu_booth_team"
+    action="action_booth_personnel"/> -->
+
+</odoo>

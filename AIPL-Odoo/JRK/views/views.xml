@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="jrk" model="ir.ui.view">
+        <field name="name">jrk.purchase.order</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='products']//field[@name='price_subtotal']" position="after">
+                <field name="deets"></field>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="jrk_list"> 
+        <field name="name">jrk.product</field>
+        <field name="model">jrk.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="No"/>
+                <field name="Description"/>
+                <field name="Marketing_Terminology" />
+                <field name="Brand" />
+                <field name="Brand_Category" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="JRK.action_window">
+      <field name="name">JRK Item List</field>
+      <field name="res_model">jrk.product</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    
+    
+    <menuitem name="JRK" id="JRK.menu_root"/>
+    <!-- menu categories -->
+    <menuitem name="Details" id="JRK.menu_1" parent="JRK.menu_root"/>
+    
+    <menuitem name="Organisation" id="JRK.menu_1_list" parent="JRK.menu_1"
+              action="JRK.action_window"/>
+
+</odoo>

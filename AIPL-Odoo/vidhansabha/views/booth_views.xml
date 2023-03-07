@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="form_booth_views">
+            <field name="name">Booth Team list</field>
+            <field name="model">vidhansabha.booth</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr=".//field[@name='name']" position="after">
+                </xpath> -->
+                <xpath expr=".//page[@name='members_users']" position ='after'>
+                    <!-- <page string="Details">
+                        <group>
+                            <field name= "incharge_name" />
+                        </group>
+                        <group>
+                            <field name= "booth_incharge" />
+                        </group>
+                        <group>
+                            <field name= "mobile_no" />
+                        </group>
+                        <group>
+                            <field name= "ward" />
+                        </group>
+                    </page> -->
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="form_booths">
+            <field name="name">Booth(s) list</field>
+            <field name="model">vidhansabha.booth.list</field>
+            <field name='arch' type='xml'>
+                <form>
+                    <sheet>
+                        <group>
+                            <field name='name' />
+                            <field name='company_id' />
+                            <field name='booth_ids' widget='many2many_tags' />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record model="ir.ui.view" id="tree_view_booths">
+            <field name="name">Booth(s) list</field>
+            <field name="model">vidhansabha.booth.list</field>
+            <field name='arch' type='xml'>
+                <tree>
+                    <field name='name' />
+                    <field name='company_id' />
+                    <field name='booth_ids' widget='many2many_tags' />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_vidhaansabha_booths">
+            <field name="name">Booth List</field>
+            <field name="res_model">vidhansabha.booth.list</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_booth_team">
+            <field name="name">Booth Team</field>
+            <field name="res_model">vidhansabha.booth</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record model="ir.ui.view" id="form_booth_personnel">
+            <field name="name">Booth Personnel</field>
+            <field name="model">res.partner</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr=".//page[@name='contact_addresses']" position ='after'>
+                    <page string="Details">
+                        <group>
+                            <field name= "booth_name" />
+                        </group>
+                        <group>
+                            <field name= "booth_incharge" />
+                        </group>
+                        <group>
+                            <field name= "mobile_no" />
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_booth_personnel">
+            <field name="name">Booth Personal</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="form_booth_personnel"/>
+        </record>
+    </data>
+</odoo>

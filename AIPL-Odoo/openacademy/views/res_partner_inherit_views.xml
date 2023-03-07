@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<odoo>
+    <record id="view_res_partner_form_inherit" model='ir.ui.view'>
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            
+            <field name="function" position="replace"/>
+            <!-- <xpath expr="//field[@name='function']" position="replace"> -->
+            
+            <!-- <field name="function" position="after">
+                <field name="instructor"/>
+            </field> -->
+            <!-- <field name="function" position="attributes">
+                <attribute name="required">1</attribute>
+            </field> -->
+               <xpath expr="//notebook//page[@name='contact_addresses']" position="after">
+                  <page string="Session1111">
+                    <field name="session_ids"  mode="tree">
+                    <tree string="Session">
+                        <field name="name"/>
+                        <field name="start_date"/>
+                    </tree>
+                    </field>
+                  </page>
+               </xpath> 
+        </field>
+    </record>
+</odoo>

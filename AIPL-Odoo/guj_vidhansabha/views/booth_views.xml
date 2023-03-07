@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+         <record model="ir.actions.act_window" id="action_booth">
+            <field name="name">Booth</field>
+            <field name="res_model">guj_vidhansabha.booth</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

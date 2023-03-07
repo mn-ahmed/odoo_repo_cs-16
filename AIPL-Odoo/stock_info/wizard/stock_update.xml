@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="upload_stock_wizard" model="ir.ui.view">
+            <field name="name">Run Tool Wizard</field>
+            <field name="model">stock_info.upload_stock</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="false"> 
+                    <group>
+                        <group>
+                            <field name="upload_file" />
+                            </group>
+                        <group>
+                            <button name="upload_excel" string="Upload" type="object"
+                                class="oe_highlight" />
+                            </group>
+                        </group>
+                        <footer></footer>
+                    </form>
+            </field>
+        </record>
+        <record id="action_upload_stock_wizard" model="ir.actions.act_window">
+            <field name="name">Run Tool</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock_info.upload_stock</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="upload_stock_wizard"></field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

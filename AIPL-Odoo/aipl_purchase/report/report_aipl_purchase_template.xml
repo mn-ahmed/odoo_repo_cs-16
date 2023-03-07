@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_aipl_purchase_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h1> Openacademy Session</h1>
+                        </div>
+                        <span t-field="doc.name" />
+                        <span t-field="doc.ifsc_id.name" />
+                        <span t-field="doc.ifsc_id.bank" />
+                        <span t-field="doc.ifsc_id.branch" />
+                        <span t-field="doc.ifsc_id.address" />
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="action_report_openacademy_session" model="ir.actions.report">
+            <field name="name">Session Detains</field>
+            <field name="model">res.partner</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">aipl_purchase.report_aipl_purchase_id</field>
+            <field name="report_file">aipl_purchase.report.report_aipl_purchase_template</field>
+            <field name="print_report_name">'Session - %s' % object.name</field>
+            <field name="binding_model_id" ref="model_res_partner"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

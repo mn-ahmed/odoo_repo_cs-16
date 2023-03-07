@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- CATEGORY -->
+    <record model="ir.module.category" id="root_category">
+        <field name="name">SG Cat</field>
+        <field name="description">DESC</field>
+    </record>
+
+    <record model="res.groups" id="res_group">
+        <field name="name">SG Group</field>
+        <field name="category_id" ref="root_category"/>
+    </record>
+
+    <record model="res.groups" id="res_manager">
+        <field name="name">SG Group Manager</field>
+        <field name="category_id" ref="root_category"/>
+    </record>
+
+</odoo>

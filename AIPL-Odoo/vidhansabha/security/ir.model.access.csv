@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vidhansabha_voter,vidhansabha.voter,model_vidhansabha_voter,base.group_user,1,1,1,1
+access_vidhansabha_chairman_secretary,vidhansabha.chairman.secretary,model_vidhansabha_chairman_secretary,base.group_user,1,1,1,1
+access_vidhansabha_booth,vidhansabha.booth,model_vidhansabha_booth,base.group_user,1,1,1,1
+access_vidhansabha_ward,vidhansabha.ward,model_vidhansabha_ward,base.group_user,1,1,1,1
+access_vidhansabha_voter_group,vidhansabha.voter,model_vidhansabha_voter,vidhansabha.res_group_nikol_admin,1,1,1,0
+access_vidhansabha_booth_list,vidhansabha.booth.list,model_vidhansabha_booth_list,base.group_user,1,1,1,1
+access_vidhansabha_vibhag,vidhansabha.vibhag,model_vidhansabha_vibhag,base.group_user,1,1,1,1
+access_vidhansabha_karyakarta,vidhansabha.karyakarta,model_vidhansabha_karyakarta,base.group_user,1,1,1,1

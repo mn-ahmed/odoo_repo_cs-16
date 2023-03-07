@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_aipl_gst_b2b,aipl.gst.b2b,model_aipl_gst_b2b,,1,1,1,1
+access_aipl_gst_cdnr,aipl.gst.cdnr,model_aipl_gst_cdnr,,1,1,1,1
+access_aipl_purchase_register,aipl.purchase.register,model_aipl_purchase_register,,1,1,1,1
+access_aipl_runtool_wizard,aipl.runtool.wizard,model_aipl_runtool_wizard,,1,1,1,1

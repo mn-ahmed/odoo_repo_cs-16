@@ -1,0 +1,13 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_estate_property,access_estate_property,model_estate_property,base.group_user,1,1,1,1
+access_estate_property_type,access_estate_property_type,model_estate_property_type,base.group_user,1,1,1,1
+access_estate_property_tag,access_estate_property_tag,model_estate_property_tag,base.group_user,1,1,1,1
+access_estate_test,access_estate_test,model_test,base.group_user,1,1,1,1
+access_estate_property_offer,access_estate_property_offer,model_estate_property_offer,base.group_user,1,1,1,1
+access_book_author,access_book_author,model_book_author,base.group_user,1,1,1,1
+access_book_category,access_book_category,model_book_category,base.group_user,1,1,1,1
+access_book_department,access_book_department,model_book_department,base.group_user,1,1,1,1
+access_book_publisher,access_book_publisher,model_book_publisher,base.group_user,1,1,1,1
+access_book_rack,access_book_rack,model_book_rack,base.group_user,1,1,1,1
+access_book_shelf,access_book_shelf,model_book_shelf,base.group_user,1,1,1,1
+access_book_books,access_book_books,model_book_books,base.group_user,1,1,1,1

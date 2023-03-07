@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="report_openacademy_session">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                               <h1> Openacademy Session</h1>
+
+                               <table class="table">
+                                 <tr>
+                                      <th>Name</th>
+                                      <th>Instructor</th>
+                                      <th>Start Date</th>      
+                                      <th>Email</th>
+
+                                 </tr>
+
+                                 <tbody>
+                                 <tr>
+                                 <td>
+                                    <span t-field="doc.name"/>
+
+                                 </td>
+                                 <td>
+                                   <span t-field="doc.instructor_id.name"/>
+                                 </td>
+                                 <td>
+                                 <span t-field="doc.start_date"/>
+                                 </td>
+                                <td>
+                                <span t-esc="email[0]"/>
+                                </td>
+                                 </tr>
+                                 </tbody>
+                               </table>
+                               
+
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    <record id="action_report_openacademy_session" model="ir.actions.report">
+            <field name="name">Session Detains</field>
+            <field name="model">openacademy.session</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">openacademy.report_openacademy_session</field>
+            <field name="report_file">openacademy.report.report_openacademy_template</field>
+            <field name="print_report_name">'Session - %s' % object.name</field>
+            <field name="binding_model_id" ref="model_openacademy_session"/>
+            <field name="binding_type">report</field>
+    </record>
+
+
+
+
+    </data>
+
+</odoo>

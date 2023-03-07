@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+    <record id="run_tool_wizard" model="ir.ui.view">
+        <field name="name">Run Tool Wizard</field>
+        <field name="model">aipl.runtool.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Run Tool Wizard">
+                <group>
+                    <group>
+                        <field name="date" />
+                    </group>
+                    <group>
+                        <button name="run_tool" string="Run Tool" type="object" class="oe_highlight" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="action_run_tool" model="ir.actions.act_window">
+        <field name="name">Run Tool</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">aipl.runtool.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="run_tool_wizard"></field>
+        <field name="target">new</field>
+    </record>
+</data>
+</odoo>

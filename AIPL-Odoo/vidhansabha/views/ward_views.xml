@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="form_ward_views">
+            <field name="name">Ward views</field>
+            <field name="model">vidhansabha.ward</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                       <group>
+                        <field name="name" />
+                       </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_ward_view">
+            <field name="name">Ward Views</field>
+            <field name="res_model">vidhansabha.ward</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="view_id" ref="form_booth_personnel"/> -->
+        </record>
+    </data>
+</odoo>

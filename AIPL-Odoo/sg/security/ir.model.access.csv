@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sg_organisation,sg.organisation,model_sg_organisation,base.group_user,1,1,1,1
+access_sg_attendance,sg.attendance,model_sg_attendance,base.group_user,1,1,1,1
+access_sg_daily_report,sg.daily.report,model_sg_daily_report,base.group_user,1,1,1,1
+access_sg_daily_report_sg,sg.daily.report,model_sg_daily_report,sg.res_manager,1,0,0,0
+access_sg_attendance_sg,sg.attendance,model_sg_attendance,sg.res_manager,1,0,0,0
+access_sg_organisation_sg,sg.organisation,model_sg_organisation,sg.res_manager,1,0,0,0

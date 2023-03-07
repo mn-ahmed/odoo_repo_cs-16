@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="menu_view_inventory_in_out_overview" model="ir.ui.view">
+        <field name="name">stock.move.tree</field>
+        <field name="model">stock.move</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Moves" create="0" default_order="date desc">
+                <field name="date" groups="stock.group_stock_user" string="Inventory Date"
+                       decoration-danger="(state not in ('cancel','done')) and date > current_date"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="location_id" options="{'no_create': True}" string="From"
+                       decoration-muted="location_usage not in ('internal','transit')"/>
+                <field name="location_dest_id" options="{'no_create': True}" string="To"
+                       decoration-muted="location_dest_usage not in ('internal','transit')"/>
+<!--                <field name="product_packaging_id" optional="hide" groups="stock.group_stock_user"/>-->
+                <field name="reference" invisible="1"/>
+                <field name="picking_type_id" invisible="1"/>
+                <field name="location_usage" invisible="1"/>
+                <field name="location_dest_usage" invisible="1"/>
+                <field name="product_id"/>
+                <field name="stock_in_quantity" string="Stock In" sum="Total"
+                       decoration-danger="(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))"
+                       decoration-success="(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))"/>
+                <field name="stock_out_quantity" string="Stock Out" sum="Total"
+                       decoration-danger="(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))"
+                       decoration-success="(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))"/>
+                <field name="internal_in_quantity" string="Internal" sum="Total"/>
+<!--                <field name="internal_out_quantity" string="Internal Out" sum="Total"/>-->
+                <field name="stock_in_out_difference_quantity" string="Quantity" sum="Total Difference"
+                       decoration-danger="(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))"
+                       decoration-success="(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))"/>
+                <field name="product_uom" options="{'no_open': True, 'no_create': True}" string="Unit"
+                       groups="uom.group_uom"/>
+                <field name="state" widget='badge' optional="show"
+                       decoration-danger="state=='cancel'"
+                       decoration-info="state== 'assigned'"
+                       decoration-muted="state == 'draft'"
+                       decoration-success="state == 'done'"
+                       decoration-warning="state not in ('draft','cancel','done','assigned')"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_menu_inventory_in_out_overview" model="ir.actions.act_window">
+        <field name="name">Product Overview</field>
+        <field name="res_model">stock.move</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="menu_view_inventory_in_out_overview"/>
+        <field name="context">{'search_default_by_product': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No stock move found
+            </p>
+            <p>
+                This menu gives you the full traceability of inventory
+                operations on a specific product. You can filter on the product
+                to see all the past or future movements for the product.
+            </p>
+        </field>
+    </record>
+</odoo>

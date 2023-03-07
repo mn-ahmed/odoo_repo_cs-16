@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="action_genre">
+        <field name="name">Genre</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lms.genres</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_authors">
+        <field name="name">Authors</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lms.authors</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_books">
+        <field name="name">Books</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lms.books</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_employee">
+        <field name="name">Employees</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lms.library_employees</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_employee_private">
+        <field name="name"> Employees Private </field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="tree_views_hr_employees_private">
+        <field name="name">Employee</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='name']" position="after">
+                <field name="car_color" />
+            </xpath> 
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="form_views_hr_employees_private">
+        <field name="name">Employee</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//*[@name='tz']" position="after">
+                    <field name="car_color"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="tree_views_hr_employees">
+        <field name="name">Employee</field>
+        <field name="model">lms.library_employees</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="hobbies" />
+                <field name="name" />
+                <field name="lang" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="form_views_hr_employees">
+        <field name="name">Employee</field>
+        <field name="model">lms.library_employees</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group col="4">
+                        <field name="hobbies" />
+                        <field name="name" />
+                        <field name="lang" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="tree_views_books">
+        <field name="name">Books</field>
+        <field name="model">lms.books</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="author_id" />
+                <field name="isbn" />
+                <field name="isbn_com" readonly="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="form_views_books">
+        <field name="name">Books</field>
+        <field name="model">lms.books</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group col="4">
+                            <field name="name" />
+                            <field name="author_id" />
+                            <field name="isbn" />
+                            <field name="isbn_com" readonly="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- <record model="ir.ui.view" id="tree_views_hr_employee">
+        <field name="name">Employees</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="hobbies" />
+                <field name="name" />
+                <field name="work_email" />
+            </tree>
+        </field>
+    </record> -->
+
+    <!-- <record model="ir.ui.view" id="form_views_hr_employee">
+        <field name="name">HR Employee Form</field>
+        <field name="model">lms.library_employees</field>
+        <field name="arch" type="xml">
+            <field name="hobbies" />
+        </field>
+    </record> -->
+
+    <menuitem name="LMS" id="lms_root" />
+    <menuitem name="LMS General" id="lms_sub" parent="lms_root"/>
+    <menuitem name="Genre" id="LMS_Genre" parent="lms_sub" action="action_genre" />
+    <menuitem name="Author" id="LMS_Author" parent="lms_sub" action="action_authors" />
+    <menuitem name="Books" id="LMS_Books" parent="lms_sub" action="action_books" />
+    <menuitem name="Books User" id="LMS_Books_User" parent="lms_sub" action="action_books" groups="LMS.lms_group_user" />
+    <menuitem name="Employees" id="LMS_Employees" parent="lms_sub" action="action_employee" />
+    <menuitem name="Employees Private" id="LMS_Employees_Private" parent="lms_sub" action="action_employee_private" />
+</odoo>
