@@ -11,6 +11,7 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     secret_key = fields.Char(compute='_compute_secret_key')
+    legal_name = fields.Char('Legal Name', readonly=True)
 
     # gst_verified = fields.Boolean(string="GST Verified", default=False, readonly=True)
     # pan_number = fields.Char(string="PAN Number")
@@ -21,7 +22,7 @@ class ResPartner(models.Model):
 
     def get_detail_from_gst(self):
         gst_secret_key = self.env.user.company_id.get_secret_key
-        if (type(self.vat) is str) and (gst_secret_key is not False):
+        if (type(self.vat) is str) and (type(gst_secret_key) is str):
             # url = "https://gmbportsgst.app:5443/gstin/GETGSTINUser?Secretkey={0}&GSTIN={1}".format(gst_secret_key,
             #                                                                                        self.vat
             #                                                                                        )
@@ -34,33 +35,25 @@ class ResPartner(models.Model):
                 if response_data['GSTIN'] is None:
                     raise ValidationError('The GSTIN "%s" is not valid!' % self.vat)
                 else:
+                    state_rec = self.env['res.country.state'].search([('l10n_in_tin', '=', str(self.vat)[0:2])])
                     for record in self:
-                        record.name = response_data['lgnm']
                         record.write({
-                            'street': response_data['address'],
-                            'street2': response_data['stj'],
-                            'city': response_data['ctj'],
-                            'state_id': False,
-                            'zip': 390011,
+                            'street': get_address_line_1(response_data['address']),
+                            'street2': get_address_line_2(response_data['address']),
+                            'city': response_data['city'],
+                            'state_id': state_rec and state_rec.id or False,
+                            'zip': response_data['pincode'],
                             'country_id': self.env.ref('base.in').id,
                             # 'gst_verified': True,
-                            'l10n_in_pan': self.vat[2:12]
+                            'l10n_in_pan': self.vat[2:12],
+                            'legal_name': response_data['lgnm']
                         }
                         )
 
                         company = self.env['res.company'].search([('id', '=', self.env.user.company_id.id)], limit=1)
                         company.write({
                             'pend_cnt': response_data['pendCnt'],
-                        }
-                        )
-                        # for resComp in company:
-
-
-
-                        # # record.type = response_data['address']
-                        # record.street = response_data['stj']
-                        # record.city = response_data['ctj']
-                        # record.l10n_in_pan = self.vat[2:12]
+                        })
             else:
                 raise ValidationError('The GSTIN "%s" is not valid!' % self.vat)
         else:
@@ -71,3 +64,21 @@ class ResPartner(models.Model):
     #     for rec in self:
     #         if rec.vat:
     #             rec.gst_verified = False
+
+
+def get_address_line_1(address):
+    main_list = address.split()
+
+    if len(main_list) > 5:
+        return ' '.join(str(main_list[i]) for i in range(5))
+    else:
+        return address
+
+
+def get_address_line_2(address):
+    main_list = address.split()
+
+    if len(main_list) >= 5:
+        return ' '.join(str(main_list[i]) for i in range(5, len(main_list)))
+    else:
+        return ''

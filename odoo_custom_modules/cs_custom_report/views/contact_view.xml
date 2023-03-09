@@ -5,12 +5,13 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath position="after" expr="//field[@name='company_type']">
+            <xpath position="after" expr="//field[@name='parent_id']">
                 <form>
                     <group>
-                        <field name="secret_key" invisible="1"></field>
+                        <field name="secret_key" invisible="1"/>
                         <field name="vat" placeholder="e.g. BE0477472701"
                                attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                         <field name="legal_name"/>
                         <value for="vat"/>
                     </group>
                 </form>
@@ -18,7 +19,7 @@
             <xpath position="after" expr="//field[@name='vat']">
                 <value for="vat"/>
                 <button name="get_detail_from_gst" type="object"
-                        style="text-decoration:underline;" class="btn-link oe_edit_only" string="Validate GST" attrs="{'invisible': [('secret_key', '=', False)]}"/>
+                        style="text-decoration:underline;" class="btn-link oe_edit_only" string="Validate GST"/>
             </xpath>
             <xpath position="replace" expr="//sheet/group/group/field[@name='vat']"/>
         </field>
