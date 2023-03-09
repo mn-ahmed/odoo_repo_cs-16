@@ -23,12 +23,12 @@ class ResPartner(models.Model):
     def get_detail_from_gst(self):
         gst_secret_key = self.env.user.company_id.get_secret_key
         if (type(self.vat) is str) and (type(gst_secret_key) is str):
-            url = "https://gmbportsgst.app:5443/gstin/GETGSTINUser?Secretkey={0}&GSTIN={1}".format(gst_secret_key,
-                                                                                                   self.vat
-                                                                                                   )
-            # url = "http://192.168.2.153:9988/gstin/GETGSTINUser?Secretkey={0}&GSTIN={1}".format(gst_secret_key,
+            # url = "https://gmbportsgst.app:5443/gstin/GETGSTINUser?Secretkey={0}&GSTIN={1}".format(gst_secret_key,
             #                                                                                        self.vat
             #                                                                                        )
+            url = "http://192.168.2.153:9988/gstin/GETGSTINUser?Secretkey={0}&GSTIN={1}".format(gst_secret_key,
+                                                                                                   self.vat
+                                                                                                   )
             response = requests.get(url)
             if response.status_code == 200:
                 response_data = json.loads(response.content)
